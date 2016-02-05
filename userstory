@@ -1,15 +1,33 @@
+updated 2/5/2016
+
 App description: This app will allow each user to find other user with related goals/tasks with the purpose of allowing these users to provide motivation to one another.
 
 User Stories:
 
-Users create accounts, with the option of attaching an email to their account.
+As a user,
+I can create an account 
+so that I can interact with other app users
 
-Users can search for groups by category or by keyword.
+As a user,
+I can search using keywords or categories 
+so I can find the group I want to join.
 
-Anyone can create a group and allow people into their group
+As a user,
+I can create a new group
+so that people with similar goals can congregate.
 
-Group members share related goals with one another.
+As a group member,
+I can allow people to join the group
+so that membership can be controlled.
 
-Each group has a group chat.
+As a group member,
+I share my specific goal with other group members
+so that we can motivate one another.
 
-There is a calendar for keeping track of goals and group events.
+As a group,
+we have a group chat
+so that we can communicate with one another.
+
+As a user,
+I have a calendar
+so that I can keep track of progress towards my goal.
