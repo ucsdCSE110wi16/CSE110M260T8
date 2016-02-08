@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LoginandRegister</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">login</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_loginin">loginin</string>
+    <string name="title_activity_main_page">mainPage</string>
+</resources>
