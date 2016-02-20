@@ -1,4 +1,4 @@
-package com.example.anara.myapplication;
+package com.example.anara;
 
 /**
  * Created by anara on 2/18/2016.

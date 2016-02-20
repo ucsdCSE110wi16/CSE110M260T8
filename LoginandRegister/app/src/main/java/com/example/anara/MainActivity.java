@@ -1,4 +1,4 @@
-package com.example.anara.myapplication;
+package com.example.anara;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-ackage com.example.anara;
+package com.example.anara;
 
 /**
  * Created by anara on 2/15/2016.
@@ -7,6 +7,7 @@ public class Group {
     String name;
     String desc;
     String[] keywords;
+    Integer id;
 
     public String getGroupName() { return name; }
 
@@ -19,6 +20,10 @@ public class Group {
     public String getDescription() { return desc; }
 
     public void setDescription( String desc){ this.desc = desc; }
+
+    public Integer getGroupId() { return id; }
+
+    public void setGroupId( Integer id ){ this.id = id; }
 
     public Group(){
 
