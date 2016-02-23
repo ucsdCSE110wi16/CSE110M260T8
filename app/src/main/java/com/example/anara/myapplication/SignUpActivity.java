@@ -10,10 +10,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 import com.firebase.client.Firebase;
 
-public class MainActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +46,33 @@ public class MainActivity extends AppCompatActivity {
 
         EditText etName = (EditText) findViewById(R.id.EditTextName);
         EditText etPass = (EditText) findViewById(R.id.EditTextPass);
+        EditText etPass1 = (EditText) findViewById(R.id.EditTextPass1);
+        EditText etEmail = (EditText) findViewById(R.id.EditTextEmail);
         String name = etName.getText().toString();
         String password = etPass.getText().toString();
+        String passConfirm = etPass1.getText().toString();
+        CharSequence email = etEmail.getText().toString();
 
-        Firebase myFirebaseRef = new Firebase("https://burning-fire-7007.firebaseio.com/user");
-        User stud = new User();
-        stud.setUserName(name);
-        stud.setPassword(password);
-        myFirebaseRef.child(stud.getPassword()).setValue(stud);
+        if (passConfirm.equals(password)) {
+            Firebase userListRef = new Firebase("https://burning-fire-7007.firebaseio.com/user");
+            User stud = new User();
+            stud.setUserName(name);
+            stud.setPassword(password);
+            stud.setEmail(email);
+            stud.setUserId(userListRef.push().getKey());
+            userListRef.child(stud.getUserName()).setValue(stud);
+        }else{
+            AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Your password entries must match!");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
 
         Intent output = new Intent();
         setResult(RESULT_OK, output);

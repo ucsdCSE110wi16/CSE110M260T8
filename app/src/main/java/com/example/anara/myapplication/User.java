@@ -7,7 +7,7 @@ public class User {
     String name;
     String password;
     CharSequence email;
-    Integer id;
+    String id;
 
     public String getUserName() { return name; }
 
@@ -21,9 +21,9 @@ public class User {
 
     public void setPassword(String password) { this.password = password; }
 
-    public Integer getUserId() {return id; }
+    public String getUserId() {return id; }
 
-    public void setUserId( Integer id) { this.id = id; }
+    public void setUserId( String id) { this.id = id; }
 
     public User(){
 

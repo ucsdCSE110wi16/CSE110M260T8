@@ -2,8 +2,10 @@
     <string name="app_name">My Application</string>
     <string name="name">User Name</string>
     <string name="password">Password</string>
+    <string name="password1">Confirm Password</string>
+    <string name="email">Email</string>
     <string name="submit">Submit</string>
     <string name="search">Search</string>
-    <string name="newUForm">New User Form</string>
+    <string name="newUForm">New User Sign Up</string>
     <string name="action_settings">Settings</string>
 </resources>
