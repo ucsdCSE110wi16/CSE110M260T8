@@ -1,11 +1,23 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">getMotivated</string>
     <string name="name">User Name</string>
     <string name="password">Password</string>
     <string name="password1">Confirm Password</string>
     <string name="email">Email</string>
     <string name="submit">Submit</string>
+    <string name="signup">Sign Up</string>
+    <string name="login">Login</string>
     <string name="search">Search</string>
     <string name="newUForm">New User Sign Up</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Strings related to login -->
+    <string name="name_email">Username or Email</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 </resources>
