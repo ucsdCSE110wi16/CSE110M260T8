@@ -4,14 +4,14 @@ package com.example.anara.myapplication;
  * Created by anara on 2/18/2016.
  */
 public class GroupMessages {
-    Integer messageId;
-    Integer groupId;
+    String messageId;
+    String groupId;
 
-    public void setGMessageId( Integer messageId ){ this.messageId = messageId; }
+    public void setGMessageId( String messageId ){ this.messageId = messageId; }
 
-    public Integer getGMessageId(){ return messageId; }
+    public String getGMessageId(){ return messageId; }
 
-    public void setGGroupId( Integer groupId ){ this.groupId = groupId; }
+    public void setGGroupId( String groupId ){ this.groupId = groupId; }
 
-    public Integer getGGroupId(){ return groupId; }
+    public String getGGroupId(){ return groupId; }
 }
