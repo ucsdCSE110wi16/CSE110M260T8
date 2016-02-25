@@ -30,7 +30,7 @@ public class Search extends AppCompatActivity {
 
 
     Firebase database = new Firebase("https://burning-fire-7007.firebaseio.com/user");
-    Query queryRef = database.orderByChild("groupId")
+    Query queryRef = database.orderByChild("groupId");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

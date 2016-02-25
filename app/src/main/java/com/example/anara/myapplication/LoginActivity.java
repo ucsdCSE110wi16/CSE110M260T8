@@ -39,6 +39,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     /**
@@ -52,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private static final ArrayList<User>uList = new ArrayList<User>();
     Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com/user");
-    ref.orderByKey();
+    //ref.orderByKey();
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
