@@ -7,9 +7,9 @@ import java.util.Date;
  * Add timestamp.
  */
 public class Messages {
-    Integer id;
+    String id;
     String message;
-    Integer userId;
+    String userId;
     Date messageDate;
     boolean deleted;
 
@@ -17,17 +17,17 @@ public class Messages {
 
     public void setMessageDate(Date date){ this.messageDate = date; }
 
-    public Integer getMsgId(){ return id; }
+    public String getMsgId(){ return id; }
 
-    public void setMsgId( Integer id ){ this.id = id; }
+    public void setMsgId( String id ){ this.id = id; }
 
     public String getMsg(){ return message; }
 
     public void setMsg( String message ){ this.message = message; }
 
-    public Integer getMsgUId(){ return userId; }
+    public String getMsgUId(){ return userId; }
 
-    public void setMsgUId( Integer userId ){ this.userId = userId; }
+    public void setMsgUId( String userId ){ this.userId = userId; }
 
     public boolean getMsgDel(){ return deleted; }
 
