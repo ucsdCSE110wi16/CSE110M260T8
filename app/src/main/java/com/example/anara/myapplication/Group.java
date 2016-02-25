@@ -6,16 +6,15 @@ package com.example.anara.myapplication;
 public class Group {
     String name;
     String desc;
+<<<<<<< HEAD
     String[] keywords;
+=======
+>>>>>>> 04564ce1a4742915691c8b018e1d379a24a1195f
     String id;
 
     public String getGroupName() { return name; }
 
     public void setGroupName(String name) { this.name = name; }
-
-    public String[] getKeywords() { return keywords; }
-
-    public void setKeywords(String[] keywords) { this.keywords = keywords; }
 
     public String getDescription() { return desc; }
 

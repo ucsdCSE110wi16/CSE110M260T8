@@ -4,16 +4,16 @@ package com.example.anara.myapplication;
  * Created by anara on 2/18/2016.
  */
 public class GroupMembers {
-    Integer groupId;
-    Integer userId;
+    String groupId;
+    String userId;
 
-    public Integer getGroupMem() { return groupId; }
+    public String getGroupMem() { return groupId; }
 
-    public void setGroupMem(Integer groupId) { this.groupId = groupId; }
+    public void setGroupMem(String groupId) { this.groupId = groupId; }
 
-    public Integer getUserMem() { return userId; }
+    public String getUserMem() { return userId; }
 
-    public void setUserMem(Integer userId) { this.userId = userId; }
+    public void setUserMem(String userId) { this.userId = userId; }
 
 
 }
