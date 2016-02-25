@@ -6,6 +6,7 @@
     <string name="email">Email</string>
     <string name="submit">Submit</string>
     <string name="signup">Sign Up</string>
+    <string name="send">Send</string>
     <string name="login">Login</string>
     <string name="search">Search</string>
     <string name="newUForm">New User Sign Up</string>
