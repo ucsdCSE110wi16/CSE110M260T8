@@ -14,4 +14,8 @@ public class GroupMessages {
     public void setGGroupId( String groupId ){ this.groupId = groupId; }
 
     public String getGGroupId(){ return groupId; }
+
+    public GroupMessages(){
+
+    }
 }

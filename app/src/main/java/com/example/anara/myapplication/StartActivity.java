@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
+//App landing page
 public class StartActivity extends AppCompatActivity {
 
     @Override

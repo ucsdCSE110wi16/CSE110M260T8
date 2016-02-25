@@ -2,7 +2,7 @@ package com.example.anara.myapplication;
 
 import java.util.Date;
 
-/**
+/*
  * Created by anara on 2/18/2016
  * Add timestamp.
  */
@@ -33,4 +33,7 @@ public class Messages {
 
     public void setMsgDel( boolean deleted ){ this.deleted = deleted; }
 
+    public Messages(){
+
+    }
 }

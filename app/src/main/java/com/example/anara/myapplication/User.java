@@ -1,6 +1,6 @@
 package com.example.anara.myapplication;
 
-/**
+/*
  * Created by anara on 2/7/2016.
  */
 public class User {

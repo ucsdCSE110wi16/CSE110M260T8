@@ -15,4 +15,7 @@ String groupId;
 
     public void setgroupKey(String keyword) { this.keyword = keyword; }
 
+    public GroupKeywords(){
+
+    }
 }
