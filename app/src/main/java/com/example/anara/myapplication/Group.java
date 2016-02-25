@@ -6,6 +6,8 @@ package com.example.anara.myapplication;
 public class Group {
     String name;
     String desc;
+    String[] keywords;
+
     String id;
 
     public String getGroupName() { return name; }
