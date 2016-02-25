@@ -38,6 +38,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.anara.myapplication.StartActivity" />
         </activity>
+        <activity android:name=".uHomeActivity"></activity>
     </application>
 
 </manifest>

@@ -6,13 +6,14 @@
     <string name="email">Email</string>
     <string name="submit">Submit</string>
     <string name="signup">Sign Up</string>
+    <string name="send">Send</string>
     <string name="login">Login</string>
     <string name="search">Search</string>
     <string name="newUForm">New User Sign Up</string>
     <string name="action_settings">Settings</string>
 
     <!-- Strings related to CreatNewGroup -->
-    <string name="newGForm">Creat New Group</string>
+    <string name="newGForm">Create New Group</string>
     <string name="groupname">Group Name</string>
     <string name="groupgoal">Group Description</string>
     <!-- Strings related to GroupActivity -->
@@ -21,12 +22,12 @@
     <string name="quit">Leave</string>
 
 
-
     <!-- Strings related to login -->
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_email">This email address is not valid!</string>
+    <string name="error_unconfirmed_password">Password entries must match!</string>
+    <string name="error_invalid_password">Password must be at least 4 characters!</string>
+    <string name="error_incorrect_password">This password is incorrect!</string>
+    <string name="error_field_required">This field is required.</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
     completions."</string>
 

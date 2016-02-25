@@ -3,7 +3,10 @@ package com.example.anara.myapplication;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.DownloadManager;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -30,6 +33,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.*;
 
@@ -48,17 +52,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final ArrayList<User>uList = new ArrayList<>();
-    Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com/user");
-
-
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -211,7 +204,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask = new UserLoginTask(email,password);
             mAuthTask.execute((Void) null);
         }
     }
@@ -363,7 +356,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            try {
+            Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com");
+            ref.authWithPassword(mEmail, mPassword, new Firebase.AuthResultHandler() {
+                @Override
+                public void onAuthenticated(AuthData authData) {
+                    /*startActivity(new Intent(getApplicationContext(), uHomeActivity.class));*/
+                }
+                @Override
+                public void onAuthenticationError(FirebaseError firebaseError) {
+                    System.out.println("Error " + firebaseError);
+                }
+            });
+            System.out.println("password" + mPassword);
+            System.out.println("ref.getAuth: " + ref.getAuth());
+            if (ref.getAuth() != null)
+                return true;
+            else{
+                return false;
+            }
+            /*try {
                 // Simulate network access.
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -376,22 +387,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     // Account exists, return true if the password matches.
                     return pieces[1].equals(mPassword);
                 }
-            }
-
+            }*/
             // TODO: register the new account here.
-            return true;
+
         }
 
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
-
+            System.out.println("Success:" +success);
             if (success) {
+                System.out.println("Goes here!");
                 finish();
+                Intent intent = new Intent(LoginActivity.this, uHomeActivity.class);
+                startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
+                System.out.println("Goes here");
             }
         }
 
