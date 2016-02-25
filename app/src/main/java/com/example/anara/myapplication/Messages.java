@@ -5,22 +5,22 @@ package com.example.anara.myapplication;
  * Add timestamp.
  */
 public class Messages {
-    String id;
+    Integer id;
     String message;
-    String userId;
+    Integer userId;
     boolean deleted;
 
-    public String getMsgId(){ return id; }
+    public Integer getMsgId(){ return id; }
 
-    public void setMsgId( String id ){ this.id = id; }
+    public void setMsgId( Integer id ){ this.id = id; }
 
     public String getMsg(){ return message; }
 
     public void setMsg( String message ){ this.message = message; }
 
-    public String getMsgUId(){ return userId; }
+    public Integer getMsgUId(){ return userId; }
 
-    public void setMsgUId( String userId ){ this.userId = userId; }
+    public void setMsgUId( Integer userId ){ this.userId = userId; }
 
     public boolean getMsgDel(){ return deleted; }
 
