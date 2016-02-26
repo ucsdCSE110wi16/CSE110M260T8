@@ -7,5 +7,4 @@
 /captures
 local.properties
 /app/app.iml
-/app/build.gradle
 build/intermediates/dex-cache/cache.xml

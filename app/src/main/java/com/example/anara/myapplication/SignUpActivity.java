@@ -1,38 +1,43 @@
 package com.example.anara.myapplication;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.TextView;
 
-import com.firebase.client.Firebase;
+import com.firebase.client.*;
 
-public class SignUpActivity extends AppCompatActivity {
+import java.util.Map;
+
+public class SignUpActivity extends AppCompatActivity{
+
+    private View mProgressView;
+    private View mSignUpView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-        setContentView(R.layout.activity_main);/*
+        setContentView(R.layout.activity_main);
+        mProgressView = findViewById(R.id.signup_progress);
+        mSignUpView = findViewById(R.id.signup_form);/*
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar); blarg.*/
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -43,40 +48,130 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void submit(View button) {
-
-        EditText etName = (EditText) findViewById(R.id.EditTextName);
+        View focusView = null;
+        boolean cancel = false;
         EditText etPass = (EditText) findViewById(R.id.EditTextPass);
         EditText etPass1 = (EditText) findViewById(R.id.EditTextPass1);
         EditText etEmail = (EditText) findViewById(R.id.EditTextEmail);
-        String name = etName.getText().toString();
         String password = etPass.getText().toString();
         String passConfirm = etPass1.getText().toString();
-        CharSequence email = etEmail.getText().toString();
+        String email = etEmail.getText().toString();
 
-        if (passConfirm.equals(password)) {
-            Firebase userListRef = new Firebase("https://burning-fire-7007.firebaseio.com/user");
-            User stud = new User();
-            stud.setUserName(name);
-            stud.setPassword(password);
-            stud.setEmail(email);
-            stud.setUserId(userListRef.push().getKey());
-            userListRef.child(stud.getUserName()).setValue(stud);
-        }else{
-            AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
-            alertDialog.setTitle("Alert");
-            alertDialog.setMessage("Your password entries must match!");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
+        etPass.setError(null);
+        etPass1.setError(null);
+        etEmail.setError(null);
+
+        if (TextUtils.isEmpty(password)) {
+            etPass.setError(getString(R.string.error_field_required));
+            focusView = etPass;
+            cancel = true;
+        } else if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            etPass.setError(getString(R.string.error_invalid_password));
+            focusView = etPass;
+            cancel = true;
+        }else if(!passConfirm.equals(password)){
+            etPass.setError(getString(R.string.error_unconfirmed_password));
+            focusView = etPass;
+            cancel = true;
+        }
+        if (TextUtils.isEmpty(email)) {
+            etEmail.setError(getString(R.string.error_field_required));
+            focusView = etEmail;
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            etEmail.setError(getString(R.string.error_invalid_email));
+            focusView = etEmail;
+            cancel = true;
         }
 
-        Intent output = new Intent();
-        setResult(RESULT_OK, output);
-        finish();
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+            showProgress(true);
+            Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com");
+            ref.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> result) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("Account creation was successful!");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                    finish();
+                    Intent intent = new Intent(SignUpActivity.this, uHomeActivity.class);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onError(FirebaseError firebaseError) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("An error occurred.");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
+            });
+            finish();
+            Intent intent = new Intent(SignUpActivity.this, SignUpActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private boolean isEmailValid(String email) {
+        //TODO: Replace this with your own logic
+        return email.contains("@");
+    }
+
+    private boolean isPasswordValid(String password) {
+        //TODO: Replace this with your own logic
+        return password.length() > 4;
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            mSignUpView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mSignUpView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mSignUpView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mSignUpView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
     }
 
     @Override

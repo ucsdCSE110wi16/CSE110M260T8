@@ -38,7 +38,41 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.anara.myapplication.StartActivity" />
         </activity>
-        <activity android:name=".uHomeActivity"></activity>
+        <activity
+            android:name=".uHomeActivity"
+            android:label="@string/uHome"></activity>
+        <activity
+            android:name=".Search"
+            android:label="@string/search"
+            android:parentActivityName=".uHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.anara.myapplication.uHomeActivity" />
+        </activity>
+        <activity
+            android:name=".CreatGroupActivity"
+            android:label="@string/newGForm"
+            android:parentActivityName=".uHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.anara.myapplication.uHomeActivity" />
+        </activity>
+        <activity
+            android:name=".GroupActivity"
+            android:label="@string/group"
+            android:parentActivityName=".uHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.anara.myapplication.uHomeActivity" />
+        </activity>
+        <activity
+            android:name=".ChatActivity"
+            android:label="@string/chat"
+            android:parentActivityName=".GroupActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.anara.myapplication.GroupActivity" />
+        </activity>
     </application>
 
 </manifest>

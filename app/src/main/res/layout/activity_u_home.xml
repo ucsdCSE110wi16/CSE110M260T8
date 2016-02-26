@@ -8,5 +8,57 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.anara.myapplication.uHomeActivity">
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="160dp"
+        android:layout_marginTop="50dp">
+    </ListView>
+    <TextView
+        android:id="@+id/groupName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/create"
+        android:layout_height="wrap_content"
+        android:text="@string/create"
+        android:onClick="create"
+        android:layout_marginTop="380dp"
+        android:layout_width="match_parent"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/searchG"
+        android:layout_height="wrap_content"
+        android:text="@string/searchG"
+        android:onClick="searchG"
+        android:layout_width="match_parent"
+        android:textStyle="bold"
+        android:layout_below="@+id/create"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/calendar"
+        android:text="@string/calendar"
+        android:onClick="calendar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textStyle="bold"
+        android:layout_below="@+id/searchG"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <!--<ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView2"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />-->
 
 </RelativeLayout>
