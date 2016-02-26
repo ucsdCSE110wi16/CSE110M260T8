@@ -93,7 +93,7 @@ public class SignUpActivity extends AppCompatActivity{
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com");
+            Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com/user");
             ref.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> result) {
