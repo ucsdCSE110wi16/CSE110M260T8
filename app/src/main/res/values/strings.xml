@@ -16,6 +16,7 @@
     <string name="create">Create a Group</string>
     <string name="searchG">Look for Groups</string>
     <string name="uHome">Home Page</string>
+    <string name="uGroup">Your Groups</string>
 
     <!-- Strings related to CreatNewGroup -->
     <string name="newGForm">Create New Group</string>

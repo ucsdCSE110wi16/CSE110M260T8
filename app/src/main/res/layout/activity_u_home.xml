@@ -22,14 +22,16 @@
         android:id="@+id/groupName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/create"
         android:layout_height="wrap_content"
         android:text="@string/create"
         android:onClick="create"
-        android:layout_marginTop="380dp"
         android:layout_width="match_parent"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginTop="300dp"
+        />
 
 
     <Button
@@ -39,9 +41,7 @@
         android:onClick="searchG"
         android:layout_width="match_parent"
         android:textStyle="bold"
-        android:layout_below="@+id/create"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/create" />
 
     <Button
         android:id="@+id/calendar"
@@ -51,8 +51,7 @@
         android:layout_width="match_parent"
         android:textStyle="bold"
         android:layout_below="@+id/searchG"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        />
 
     <!--<ListView
         android:layout_width="wrap_content"
