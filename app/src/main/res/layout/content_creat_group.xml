@@ -27,6 +27,7 @@
             android:layout_weight="0.05">
         </TextView>
         <EditText
+            android:layout_marginTop="10dp"
             android:id="@+id/EditTextName"
             android:layout_height="wrap_content"
             android:hint="@string/groupname"
@@ -35,14 +36,18 @@
         </EditText>
 
         <EditText
+            android:layout_marginTop="15dp"
+            android:inputType="textMultiLine"
+            android:lines="8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
             android:hint="@string/groupgoal"
             android:ems="10"
-            android:id="@+id/EditTextDesc" />
+            android:id="@+id/EditTextDesc"
+            android:gravity="top|left"/>
 
         <Button
+            android:layout_marginTop="20dp"
             android:id="@+id/Submit"
             android:layout_height="36dp"
             android:text="@string/submit"
