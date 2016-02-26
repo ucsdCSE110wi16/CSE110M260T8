@@ -35,17 +35,17 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
     private Date mLastMessageDate = new Date();
     private String mConvoId;
     private MessageDataSource.MessagesListener mListener;
-    List<Messages> Message_List;
-    private MessageDataSource dataSource;
-    public static SharedPreferences noteprefs;
-    HashMap<String, String> MapListMessages = new HashMap<String, String>();
+    //List<Messages> Message_List;
+    //private MessageDataSource dataSource;
+    //public static SharedPreferences noteprefs;
+    //HashMap<String, String> MapListMessages = new HashMap<String, String>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_chat);
-        mRecipient = "Chang";
+        mRecipient = "Shuo";
 
         mListView = (ListView)findViewById(R.id.messages_list);
         mMessages = new ArrayList<>();
@@ -61,7 +61,7 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
         sendMessage.setOnClickListener(this);
 
         String[] ids = {"Shuo","-", "Chang"};
-        //Arrays.sort(ids);
+        Arrays.sort(ids);
         mConvoId = ids[0]+ids[1]+ids[2];
 
         mListener = MessageDataSource.addMessagesListener(mConvoId, this);
@@ -76,20 +76,27 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
         Messages msg = new Messages();
         msg.setMessageDate(new Date());
         msg.setMsg(newMessage);
-        msg.setMsgId("Chang");
+        msg.setMsgId("Shuo");
 
         MessageDataSource.saveMessage(msg, mConvoId);
     }
-
+    @Override
     public void onMessageAdded(Messages message){
         mMessages.add(message);
         messageAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MessageDataSource.stop(mListener);
+    }
+
     private class MessagesAdapter extends ArrayAdapter<Messages>{
-        MessagesAdapter(ArrayList<Messages> message){
-            super(ChatActivity.this, R.layout.message, R.id.message, message);
+        MessagesAdapter(ArrayList<Messages> messages){
+            super(ChatActivity.this, R.layout.message, R.id.message, messages);
         }
+        @Override
         public View getView(int position, View convertView, ViewGroup parent){
             convertView = super.getView(position, convertView, parent);
             Messages message = getItem(position);
@@ -101,22 +108,22 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
 
             int sdk = Build.VERSION.SDK_INT;
             if (message.getMsgId().equals("Chang")){
-               /*
+
                if (sdk >= Build.VERSION_CODES.JELLY_BEAN) {
-                    nameView.setBackground();
+                   nameView.setBackground(getDrawable(R.drawable.bubble_right_green));
                 }else{
-                    nameView.setBackgroundDrawable(getDrawable();
+                   nameView.setBackgroundDrawable(getDrawable(R.drawable.bubble_right_green));
                 }
-                */
+
                 layoutParams.gravity = Gravity.RIGHT;
             }else{
-                /*
+
                 if (sdk >= Build.VERSION_CODES.JELLY_BEAN) {
-                    nameView.setBackground(getDrawable(R.drawable.));
+                    nameView.setBackground(getDrawable(R.drawable.bubble_left_gray));
                 } else{
                     nameView.setBackgroundDrawable(getDrawable(R.drawable.bubble_left_gray));
                 }
-                */
+
                 layoutParams.gravity = Gravity.LEFT;
             }
 

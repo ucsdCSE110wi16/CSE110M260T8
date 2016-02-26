@@ -27,7 +27,7 @@ public class MessageDataSource {
         String key = sDateFormat.format(date);
         HashMap<String, String> msg = new HashMap<>();
         msg.put(COLUMN_TEXT, message.getMsg());
-        msg.put(COLUMN_SENDER, convoId);
+        msg.put(COLUMN_SENDER, message.getMsgId());
         theBase.child(convoId).child(key).setValue(msg);
     }
 
@@ -42,19 +42,16 @@ public class MessageDataSource {
     }
 
     public static class MessagesListener implements ChildEventListener{
-
         private MessagesCallbacks callbacks;
-
         public MessagesListener(MessagesCallbacks callbacks){
             this.callbacks = callbacks;
         }
-
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
             HashMap<String, String> msg = (HashMap<String, String>)dataSnapshot.getValue();
             Messages message = new Messages();
             message.setMsgId(msg.get(COLUMN_SENDER));
-            message.setMsgId(msg.get(COLUMN_TEXT));
+            message.setMsg(msg.get(COLUMN_TEXT));
 
             try {
                 message.setMessageDate(sDateFormat.parse(dataSnapshot.getKey()));

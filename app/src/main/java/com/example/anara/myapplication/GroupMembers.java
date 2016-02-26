@@ -14,6 +14,7 @@ public class GroupMembers {
     public String getUserMem() { return userId; }
 
     public void setUserMem(String userId) { this.userId = userId; }
+
     public GroupMembers(){
 
     }
