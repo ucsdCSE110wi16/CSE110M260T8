@@ -76,7 +76,7 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
         Messages msg = new Messages();
         msg.setMessageDate(new Date());
         msg.setMsg(newMessage);
-        msg.setMsgId("Shuo");
+        msg.setMsgId("Chang");
 
         MessageDataSource.saveMessage(msg, mConvoId);
     }
@@ -102,7 +102,8 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
             Messages message = getItem(position);
 
             TextView nameView = (TextView)convertView.findViewById(R.id.message);
-            nameView.setText(message.getMsg());
+            String nameString = message.getMsgId() + ": " + message.getMsg();
+            nameView.setText(nameString);
 
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)nameView.getLayoutParams();
 
