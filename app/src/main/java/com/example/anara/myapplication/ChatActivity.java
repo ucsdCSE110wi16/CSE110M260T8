@@ -1,6 +1,7 @@
 package com.example.anara.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
     //private MessageDataSource dataSource;
     //public static SharedPreferences noteprefs;
     //HashMap<String, String> MapListMessages = new HashMap<String, String>();
+    ArrayList<String> groupid;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -51,6 +53,11 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
         mMessages = new ArrayList<>();
         messageAdapter = new MessagesAdapter(mMessages);
         mListView.setAdapter(messageAdapter);
+
+        Intent curr = this.getIntent();
+        if(curr.getStringArrayListExtra("groupid")!= null)
+            groupid = curr.getStringArrayListExtra("groupid");
+
 
         setTitle(mRecipient);
         if (getSupportActionBar() != null){

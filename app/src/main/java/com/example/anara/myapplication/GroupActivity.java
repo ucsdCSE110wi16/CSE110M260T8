@@ -103,19 +103,27 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.join:
-                joinButton.setVisibility(View.GONE);
-                Firebase membersListRef = new Firebase("https://burning-fire-7007.firebaseio.com/groupMembers");
-                GroupMembers gm = new GroupMembers();
-                gm.setGroupMem(groupid.get(0));
-                gm.setUserMem(membersListRef.getAuth().getUid());
-                membersListRef.child(gm.getGroupMem()).setValue(gm);
-                break;
-            case R.id.chat:
                 Intent intent = new Intent(this,ChatActivity.class);
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(groupid.get(0));
                 intent.putStringArrayListExtra("groupid", list);
                 startActivity(intent);
+                /*
+                joinButton.setVisibility(View.GONE);
+
+                Firebase membersListRef = new Firebase("https://burning-fire-7007.firebaseio.com/groupMembers");
+                GroupMembers gm = new GroupMembers();
+                gm.setGroupMem(groupid.get(0));
+                gm.setUserMem(membersListRef.getAuth().getUid());
+                membersListRef.child(gm.getGroupMem()).setValue(gm);*/
+                break;
+            case R.id.chat:
+                /*
+                Intent intent = new Intent(this,ChatActivity.class);
+                ArrayList<String> list = new ArrayList<String>();
+                list.add(groupid.get(0));
+                intent.putStringArrayListExtra("groupid", list);
+                startActivity(intent);*/
                 break;
             case R.id.quit:
                 startActivity(new Intent(this,uHomeActivity.class));

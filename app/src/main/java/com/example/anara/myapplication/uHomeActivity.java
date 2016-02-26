@@ -92,9 +92,11 @@ public class uHomeActivity extends ListActivity {
     }
 */
 public void create(android.view.View button){
+
+    //PASS THE USERID AS A PARAMETER TO CREATGROUPACTIVITY.JAVA
     Intent intent = new Intent(uHomeActivity.this, CreatGroupActivity.class);
     ArrayList<String> list = new ArrayList<String>();
-    list.add(ref.getAuth().getUid());
+    list.add(ref.getAuth().getUid());//NEED TO FIX THE USER ID HERE...
     intent.putStringArrayListExtra("userid", list);
     startActivity(intent);
 }
