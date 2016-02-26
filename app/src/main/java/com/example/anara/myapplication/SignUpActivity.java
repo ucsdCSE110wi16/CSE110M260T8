@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.firebase.client.*;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity{

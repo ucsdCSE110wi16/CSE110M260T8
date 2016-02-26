@@ -40,7 +40,7 @@
             android:inputType="text"
             android:hint="@string/groupgoal"
             android:ems="10"
-            android:id="@+id/EditTextPass" />
+            android:id="@+id/EditTextDesc" />
 
         <Button
             android:id="@+id/Submit"
