@@ -43,7 +43,7 @@
             android:label="@string/uHome"></activity>
         <activity
             android:name=".Search"
-            android:label="@string/search"
+            android:label="Look for Group"
             android:parentActivityName=".uHomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
