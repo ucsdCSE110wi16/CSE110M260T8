@@ -23,6 +23,7 @@
     <string name="groupgoal">Group Description</string>
     <!-- Strings related to GroupActivity -->
     <string name="chat">Chat</string>
+    <string name="join">Join</string>
     <string name="members">Members</string>
     <string name="quit">Leave</string>
 

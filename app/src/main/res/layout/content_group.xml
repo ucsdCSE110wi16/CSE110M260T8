@@ -17,27 +17,26 @@
         android:layout_height="wrap_content"
         android:text="@string/chat"
         android:id="@+id/chat"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="68dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
+        android:layout_toLeftOf="@+id/quit"
+        android:layout_toStartOf="@+id/quit" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/members"
-        android:id="@+id/members"
-        android:layout_alignTop="@+id/chat"
-        android:layout_centerHorizontal="true" />
-
+        android:text="@string/join"
+        android:id="@+id/join"
+        android:layout_marginBottom="68dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/quit"
+        android:layout_toStartOf="@+id/quit" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/quit"
         android:id="@+id/quit"
-        android:layout_alignTop="@+id/members"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignTop="@+id/chat"
+        android:layout_toEndOf="@+id/goal" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,9 +44,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/groupgoal"
         android:id="@+id/goal"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/members"
-        android:layout_alignEnd="@+id/members" />
+        android:layout_alignParentTop="true" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -58,6 +55,7 @@
         android:layout_above="@+id/chat"
         android:layout_toEndOf="@+id/chat"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:choiceMode="singleChoice" />
 
 </RelativeLayout>

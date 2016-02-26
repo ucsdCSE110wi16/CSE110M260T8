@@ -6,6 +6,7 @@
     android:orientation="vertical"
     tools:context="com.example.anara.myapplication.ChatActivity">
 
+
     <ListView
         android:id="@+id/messages_list"
         android:layout_weight="100"

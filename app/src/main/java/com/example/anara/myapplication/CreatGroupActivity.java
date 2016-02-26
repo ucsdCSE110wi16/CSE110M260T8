@@ -1,5 +1,7 @@
 package com.example.anara.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,14 +15,16 @@ import android.widget.EditText;
 
 import com.firebase.client.Firebase;
 
+import java.util.ArrayList;
+
 public class CreatGroupActivity extends AppCompatActivity {
+
+    ArrayList<String> userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creat_group);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        /*setSupportActionBar(toolbar);*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -30,7 +34,13 @@ public class CreatGroupActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        Intent curr = this.getIntent();
+        if(curr.getStringArrayListExtra("userid")!= null)
+            userid = curr.getStringArrayListExtra("userid");
+
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -40,21 +50,37 @@ public class CreatGroupActivity extends AppCompatActivity {
     public void submit(View button) {
 
         EditText etName = (EditText) findViewById(R.id.EditTextName);
-        EditText etDesc = (EditText) findViewById(R.id.EditTextName);
+        EditText etDesc = (EditText) findViewById(R.id.EditTextDesc);
         String name = etName.getText().toString();
         String description = etDesc.getText().toString();
 
-        Firebase myFirebaseRef = new Firebase("https://burning-fire-7007.firebaseio.com/group");
-        Group grp = new Group();
-        grp.setGroupName(name);
-        grp.setDescription(description);
-        grp.setGroupId(myFirebaseRef.push().getKey());
-        myFirebaseRef.child(grp.getGroupId()).setValue(grp);
+        if(name == "" || description == ""){
+         //   name = "";
+            finish();
+        }
+        else {
+            Firebase groupListRef = new Firebase("https://burning-fire-7007.firebaseio.com/group");
+            Group grp = new Group();
+            grp.setGroupName(name);
+            grp.setDescription(description);
+            grp.setGroupId(groupListRef.push().getKey());
+            groupListRef.child(grp.getGroupId()).setValue(grp);
 
-        Intent intent = new Intent(this, GroupActivity.class);
+            Firebase membersListRef = new Firebase("https://burning-fire-7007.firebaseio.com/groupMembers");
+            GroupMembers gm = new GroupMembers();
+            gm.setGroupMem(grp.getGroupId());
+            gm.setUserMem(userid.get(0));
+            membersListRef.child(gm.getGroupMem()).setValue(gm);
 
-    //    Intent output = new Intent();setResult(RESULT_OK, output);
-        finish();
+            Intent intent = new Intent(CreatGroupActivity.this, GroupActivity.class);
+            ArrayList<String> list = new ArrayList<String>();
+            list.add(grp.getGroupId());
+            intent.putStringArrayListExtra("groupid", list);
+            startActivity(intent);
+
+            finish();
+        }
+
     }
 
     @Override
