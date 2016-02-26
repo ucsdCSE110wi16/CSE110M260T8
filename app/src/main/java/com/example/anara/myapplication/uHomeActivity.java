@@ -92,7 +92,7 @@ public class uHomeActivity extends ListActivity {
     }
 
     public void calendar(android.view.View button){
-        Intent intent = new Intent(uHomeActivity.this, ChatActivity.class);
+        Intent intent = new Intent(uHomeActivity.this, CalActivity.class);
         startActivity(intent);
     }
 }

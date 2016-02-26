@@ -40,7 +40,7 @@
         </activity>
         <activity
             android:name=".uHomeActivity"
-            android:label="@string/uHome"></activity>
+            android:label="@string/uHome" />
         <activity
             android:name=".Search"
             android:label="@string/search"
@@ -72,6 +72,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.anara.myapplication.GroupActivity" />
+        </activity>
+        <activity
+            android:name=".CalActivity"
+            android:label="@string/title_activity_cal"
+            android:parentActivityName=".uHomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.anara.myapplication.uHomeActivity" />
         </activity>
     </application>
 

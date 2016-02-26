@@ -26,6 +26,11 @@
     <string name="members">Members</string>
     <string name="quit">Leave</string>
 
+    <!-- Strings related to calendar-->
+    <string name="customize">Customize</string>
+    <string name="save">Save Changes</string>
+    <string name="undo">Undo</string>
+    <string name="title_activity_cal">Calendar</string>
 
     <!-- Strings related to login -->
     <string name="error_invalid_email">This email address is not valid!</string>
@@ -35,5 +40,6 @@
     <string name="error_field_required">This field is required.</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
     completions."</string>
+
 
 </resources>

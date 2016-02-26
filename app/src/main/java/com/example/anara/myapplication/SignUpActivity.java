@@ -96,16 +96,6 @@ public class SignUpActivity extends AppCompatActivity{
             ref.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> result) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
-                    alertDialog.setTitle("Alert");
-                    alertDialog.setMessage("Account creation was successful!");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
                     finish();
                     Intent intent = new Intent(SignUpActivity.this, uHomeActivity.class);
                     startActivity(intent);
