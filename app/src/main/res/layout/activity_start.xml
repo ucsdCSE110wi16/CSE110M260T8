@@ -18,8 +18,9 @@
         android:layout_height="wrap_content"
         android:text="@string/login"
         android:onClick="login"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="365dp"
         android:layout_width="match_parent"
+        android:background="@android:color/holo_orange_light"
         android:textStyle="bold" />
 
 
@@ -27,9 +28,10 @@
         android:id="@+id/Signup"
         android:text="@string/signup"
         android:onClick="signup"
-        android:layout_marginTop="-5dp"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:background="@android:color/holo_orange_light"
         android:textStyle="bold" />
 
 </LinearLayout>

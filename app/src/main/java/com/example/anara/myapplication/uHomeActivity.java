@@ -15,15 +15,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class uHomeActivity extends ListActivity {
-
+    Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com/groupMembers");
+    Query queryRef = ref.orderByChild("userId").equalTo(ref.getAuth().getUid());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_u_home);
         ListView groupView = (ListView) findViewById(android.R.id.list);
         Firebase.setAndroidContext(this);
-        Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com/groupMembers");
-        Query queryRef = ref.orderByChild("userId").equalTo(ref.getAuth().getUid());
+
         FirebaseListAdapter<Group> mAdapter = new FirebaseListAdapter<Group>(this, Group.class, android.R.layout.simple_list_item_1, queryRef) {
             @Override
             protected void populateView(android.view.View view, Group group, int position) {
@@ -85,11 +85,21 @@ public class uHomeActivity extends ListActivity {
         Intent intent = new Intent(uHomeActivity.this, Search.class);
         startActivity(intent);
     }
-
+/*
     public void create(android.view.View button){
         Intent intent = new Intent(uHomeActivity.this, CreatGroupActivity.class);
         startActivity(intent);
     }
+*/
+public void create(android.view.View button){
+
+    //PASS THE USERID AS A PARAMETER TO CREATGROUPACTIVITY.JAVA
+    Intent intent = new Intent(uHomeActivity.this, CreatGroupActivity.class);
+    ArrayList<String> list = new ArrayList<String>();
+    list.add(ref.getAuth().getUid());//NEED TO FIX THE USER ID HERE...
+    intent.putStringArrayListExtra("userid", list);
+    startActivity(intent);
+}
 
     public void calendar(android.view.View button){
         Intent intent = new Intent(uHomeActivity.this, ChatActivity.class);
