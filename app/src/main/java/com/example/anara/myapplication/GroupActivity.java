@@ -72,6 +72,7 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String desc = (String) child.child("description").getValue();
                     String name = (String) child.child("groupName").getValue();
+                    groupid.add(name);
                     descTextView.setText(name + ": \n" + desc);
 
                 }

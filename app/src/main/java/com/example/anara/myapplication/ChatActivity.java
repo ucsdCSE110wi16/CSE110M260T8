@@ -47,7 +47,6 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_chat);
-        mRecipient = "Shuo";
 
         mListView = (ListView)findViewById(R.id.messages_list);
         mMessages = new ArrayList<>();
@@ -58,6 +57,7 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
         if(curr.getStringArrayListExtra("groupid")!= null)
             groupid = curr.getStringArrayListExtra("groupid");
 
+        mRecipient = groupid.get(1);
 
         setTitle(mRecipient);
         if (getSupportActionBar() != null){
@@ -67,9 +67,7 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
         Button sendMessage = (Button)findViewById(R.id.send_message);
         sendMessage.setOnClickListener(this);
 
-        String[] ids = {"Shuo","-", "Chang"};
-        Arrays.sort(ids);
-        mConvoId = ids[0]+ids[1]+ids[2];
+        mConvoId = groupid.get(0);
 
         mListener = MessageDataSource.addMessagesListener(mConvoId, this);
 
