@@ -12,32 +12,6 @@
     tools:context="com.example.anara.myapplication.GroupActivity"
     tools:showIn="@layout/activity_group">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/chat"
-        android:id="@+id/chat"
-        android:layout_marginBottom="68dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/quit"
-        android:layout_toStartOf="@+id/quit" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/join"
-        android:id="@+id/join"
-        android:layout_marginBottom="68dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/quit"
-        android:layout_toStartOf="@+id/quit" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/quit"
-        android:id="@+id/quit"
-        android:layout_alignTop="@+id/chat"
-        android:layout_toEndOf="@+id/goal" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,9 +27,27 @@
         android:layout_below="@+id/goal"
         android:layout_marginTop="56dp"
         android:layout_above="@+id/chat"
-        android:layout_toEndOf="@+id/chat"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:choiceMode="singleChoice" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chat"
+        android:id="@+id/chat"
+        android:layout_marginBottom="68dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/quit"
+        android:layout_toStartOf="@+id/quit" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quit"
+        android:id="@+id/quit"
+        android:layout_alignTop="@+id/chat"
+        android:layout_toRightOf="@+id/goal" />
 
 </RelativeLayout>

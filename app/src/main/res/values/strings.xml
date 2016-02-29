@@ -27,6 +27,7 @@
     <string name="join">Join</string>
     <string name="members">Members</string>
     <string name="quit">Leave</string>
+    <string name="uUser">Group Members</string>
 
     <!-- Strings related to calendar-->
     <string name="customize">Customize</string>
