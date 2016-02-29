@@ -93,35 +93,14 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
         //      Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com/groupMembers");
         Firebase mRef = myRef.child("groupMembers");
         Query userqueryRef = mRef.orderByChild("groupMem").equalTo(groupid.get(0));
+
         userqueryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 members.clear();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    String userId = (String) child.child("userMem").getValue();
-                    Firebase gRef = myRef.child("user");
-                    //new Firebase("https://burning-fire-7007.firebaseio.com/user");
-                    Query qGref = gRef.orderByChild("userId").equalTo("dd0bf07e-db80-49c7-8410-3d47d44ebb20");
-                    /*FirebaseListAdapter<Group> mAdapter = new FirebaseListAdapter<Group>(this, Group.class, android.R.layout.simple_list_item_1, qGref) {
-                        @Override
-                        protected void populateView(android.view.View view, Group group, int position) {
-                            ((TextView)view.findViewById(R.id.groupName)).setText(group.getGroupName());
-                        }
-
-                    };*/
-                    qGref.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                String name = (String) child.child("userName").getValue();
-                                members.add(name);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(FirebaseError firebaseError) {
-                        }
-                    });
+                    String userId = (String) myRef.getAuth().getProviderData().get("email");
+                    members.add(userId);
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_multiple_choice, members);
                 userView.setAdapter(adapter);
