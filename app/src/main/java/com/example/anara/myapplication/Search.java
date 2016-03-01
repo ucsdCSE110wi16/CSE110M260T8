@@ -1,5 +1,6 @@
 package com.example.anara.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -107,6 +108,7 @@ public class Search extends AppCompatActivity {
                     finalData = "" + listItems.get(position);
 
 
+
                 }
             });
         }
@@ -135,24 +137,10 @@ public class Search extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-
-                String nameofgroup = dataSnapshot.getValue().toString();
-
-                String[] datainstring = nameofgroup.split(", ");
-                ArrayList<String> groupname = new ArrayList<String>();
-                for (int i = 0; i < datainstring.length; i++) {
-                    if (datainstring[i].contains("groupName")) {
-                        groupname.add(datainstring[i]);
-                    }
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    String name = (String) child.child("groupName").getValue();
+                    listItems.add(name);
                 }
-                for (int i = 0; i < groupname.size(); i++) {
-                    String old = groupname.get(i);
-                    String justname = old.substring(10);
-                    groupname.set(i, justname);
-
-                    listItems.add(groupname.get(i));
-                }
-
 
             }
 
