@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Menu;
@@ -56,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity{
         EditText etEmail = (EditText) findViewById(R.id.EditTextEmail);
         String password = etPass.getText().toString();
         String passConfirm = etPass1.getText().toString();
-        String email = etEmail.getText().toString();
+        final String email = etEmail.getText().toString();
 
         etPass.setError(null);
         etPass1.setError(null);
@@ -93,10 +94,15 @@ public class SignUpActivity extends AppCompatActivity{
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com/user");
+            final Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com");
             ref.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> result) {
+                    Firebase userListRef = new Firebase("https://burning-fire-7007.firebaseio.com/user");
+                    User stud = new User();
+                    stud.setEmail(email);
+                    stud.setUserId(ref.getAuth().getUid());
+                    userListRef.child(stud.getUserId()).setValue(stud);
                     finish();
                     Intent intent = new Intent(SignUpActivity.this, uHomeActivity.class);
                     startActivity(intent);
@@ -104,18 +110,10 @@ public class SignUpActivity extends AppCompatActivity{
 
                 @Override
                 public void onError(FirebaseError firebaseError) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
-                    alertDialog.setTitle("Alert");
-                    alertDialog.setMessage("An error occurred.");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
+                    Log.e("SignUpActivity", firebaseError.getMessage());
                 }
             });
+
             finish();
             Intent intent = new Intent(SignUpActivity.this, SignUpActivity.class);
             startActivity(intent);

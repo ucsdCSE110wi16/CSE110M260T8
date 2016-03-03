@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.firebase.client.*;
 import com.firebase.ui.FirebaseListAdapter;
@@ -22,7 +24,9 @@ import java.util.HashMap;
 public class uHomeActivity extends AppCompatActivity {
 
     protected ArrayList<String> groupNames = new ArrayList<>();
+    protected ArrayList<String> groupIds = new ArrayList<>();
     Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com/");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,41 +45,52 @@ public class uHomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 groupNames.clear();
-                for(DataSnapshot child: dataSnapshot.getChildren()){
+                groupIds.clear();
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String groupId = (String) child.child("groupMem").getValue();
                     Firebase gRef = new Firebase("https://burning-fire-7007.firebaseio.com/group");
                     Query qGref = gRef.orderByChild("groupId").equalTo(groupId);
-                    /*FirebaseListAdapter<Group> mAdapter = new FirebaseListAdapter<Group>(this, Group.class, android.R.layout.simple_list_item_1, qGref) {
-                        @Override
-                        protected void populateView(android.view.View view, Group group, int position) {
-                            ((TextView)view.findViewById(R.id.groupName)).setText(group.getGroupName());
-                        }
 
-                    };*/
                     qGref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            for(DataSnapshot child: dataSnapshot.getChildren()) {
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 String name = (String) child.child("groupName").getValue();
                                 groupNames.add(name);
-                                Log.v("uHomeActivity","groups = " + groupNames);
+                                String id = (String) child.child("groupId").getValue();
+                                groupIds.add(id);
+                                Log.v("uHomeActivity", "groups = " + groupNames);
+                                Log.v("uHomeActivity", "ids = " + groupIds);
                             }
                         }
 
                         @Override
                         public void onCancelled(FirebaseError firebaseError) {
-
+                            Log.e("uHomeActivity", firebaseError.getMessage());
                         }
                     });
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(uHomeActivity.this, android.R.layout.simple_list_item_multiple_choice,groupNames);
-
-                groupView.setAdapter(adapter);
             }
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 Log.e("uHomeActivity", firebaseError.getMessage());
+            }
+        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(uHomeActivity.this, android.R.layout.simple_list_item_multiple_choice, groupNames);
+
+        groupView.setAdapter(adapter);
+
+        groupView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+               Intent intent = new Intent(uHomeActivity.this, GroupActivity.class);
+                ArrayList<String> list = new ArrayList<String>();
+                list.add(groupIds.get(position));
+                Log.v("uHomeActivity", "GroupId:" +list.get(0));
+                intent.putStringArrayListExtra("groupid", list);
+                startActivity(intent);
             }
         });
     }
@@ -104,4 +119,7 @@ public void create(android.view.View button){
         Intent intent = new Intent(uHomeActivity.this, CalActivity.class);
         startActivity(intent);
     }
+
+
+
 }
