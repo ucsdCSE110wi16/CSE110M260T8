@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
@@ -17,13 +18,15 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class groupCreateTest {
+public class goToSearchTest {
     @Rule
-    public ActivityTestRule<CreatGroupActivity> uActivityRule= new ActivityTestRule(CreatGroupActivity.class);
+    public ActivityTestRule<uHomeActivity> uActivityRule= new ActivityTestRule(uHomeActivity.class);
 
     @Test
-    public void clickSubmitButtonGoesToGroup() {
-        onView(withId(R.id.Submit)).perform(click());
-        onView(withId(R.id.goal)).check(matches(withText("CGroup Description")));
+    public void clickSearchButtonGoesToSearch() {
+        onView(withId(R.id.searchG)).perform(click());
+        onView(withId(R.id.txtsearch)).check(matches(withHint("Search")));
     }
+
+
 }
