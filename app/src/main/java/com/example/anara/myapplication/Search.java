@@ -100,6 +100,7 @@ public class Search extends AppCompatActivity {
         for(int i = listItems.size()-1; i>= 0; i--) {
             if (!listItems.get(i).toLowerCase().contains(textToSearch.toLowerCase())) {
                 listItems.remove(i);
+                idOfGroups.remove(i);
                 adapter.notifyDataSetChanged();
             }
 
