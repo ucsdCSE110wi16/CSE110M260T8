@@ -45,7 +45,7 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
         Intent curr = this.getIntent();
         if (curr.getStringArrayListExtra("groupid") != null)
             groupid = curr.getStringArrayListExtra("groupid");
-  //      System.out.println(groupid);
+        System.out.println(groupid);
 
         final Firebase myFirebaseRef = myRef.child("group");
         Query queryRef = myFirebaseRef.orderByChild("groupId").equalTo(groupid.get(0));
@@ -73,14 +73,14 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
         userView.addHeaderView(header, null, false);
         Firebase mRef = myRef.child("groupMembers");
         Query userqueryRef = mRef.orderByChild("groupMem").equalTo(groupid.get(0));
-    //    System.out.println(groupid.get(0));
+        System.out.println(groupid.get(0));
         userqueryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 members.clear();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    String userId = (String) child.child("userMem").getValue();//UID
-               //     System.out.println(userId);
+                    final String userId = (String) child.child("userMem").getValue();//UID
+                    System.out.println(userId);
                     Firebase gRef = myRef.child("user");
                     Query qGref = gRef.orderByChild("userId").equalTo(userId);
                     qGref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -88,9 +88,8 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 String email = (String) child.child("email").getValue();
-                          //      System.out.println(email);
-                                System.out.println(myRef.getAuth().getProviderData().get("email"));
-                                if (email == myRef.getAuth().getProviderData().get("email"))
+                                System.out.println("email:"+email);
+                                if (userId.equals(myRef.getAuth().getUid()))
                                     inGroup = true;
                                 members.add(email);
                             }
