@@ -19,17 +19,21 @@ import java.util.ArrayList;
 
 public class CreatGroupActivity extends AppCompatActivity {
 
-    ArrayList<String> userid;
+   Firebase myRef = new Firebase("https://burning-fire-7007.firebaseio.com");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creat_group);
 
-        Intent curr = this.getIntent();
-        if(curr.getStringArrayListExtra("userid")!= null)
-            userid = curr.getStringArrayListExtra("userid");
-
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 
     @Override
@@ -50,17 +54,17 @@ public class CreatGroupActivity extends AppCompatActivity {
             finish();
         }
         else {
-            Firebase groupListRef = new Firebase("https://burning-fire-7007.firebaseio.com/group");
+            Firebase groupListRef = myRef.child("group");
             Group grp = new Group();
             grp.setGroupName(name);
             grp.setDescription(description);
             grp.setGroupId(groupListRef.push().getKey());
             groupListRef.child(grp.getGroupId()).setValue(grp);
 
-            Firebase membersListRef = new Firebase("https://burning-fire-7007.firebaseio.com/groupMembers");
+            Firebase membersListRef = myRef.child("groupMembers");
             GroupMembers gm = new GroupMembers();
             gm.setGroupMem(grp.getGroupId());
-            gm.setUserMem(userid.get(0));
+            gm.setUserMem(myRef.getAuth().getUid());
             membersListRef.child(gm.getGroupMem()).setValue(gm);
 
             Intent intent = new Intent(CreatGroupActivity.this, GroupActivity.class);

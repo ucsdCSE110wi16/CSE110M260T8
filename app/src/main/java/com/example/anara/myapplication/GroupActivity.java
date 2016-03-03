@@ -55,12 +55,14 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
         Intent curr = this.getIntent();
         if (curr.getStringArrayListExtra("groupid") != null)
             groupid = curr.getStringArrayListExtra("groupid");
+        System.out.println(groupid);
+
         /*
         if (curr.getStringArrayListExtra("userid") != null)
             userid = curr.getStringArrayListExtra("userid");
         else userid.add("no user id passed from creatgroup");*/
 
-        Firebase myFirebaseRef = myRef.child("group");
+        final Firebase myFirebaseRef = myRef.child("group");
         Query queryRef = myFirebaseRef.orderByChild("groupId").equalTo(groupid.get(0));
 
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -69,7 +71,6 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String desc = (String) child.child("description").getValue();
                     grpName = (String) child.child("groupName").getValue();
-                    groupid.add(grpName);
                     descTextView.setText(grpName + ": \n" + desc);
                 }
             }
@@ -87,28 +88,30 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.header2, userView, false);
         userView.addHeaderView(header, null, false);
         Firebase mRef = myRef.child("groupMembers");
-        final Query userqueryRef = mRef.orderByChild("groupMem").equalTo(groupid.get(0));
-
+        Query userqueryRef = mRef.orderByChild("groupMem").equalTo(groupid.get(0));
+        System.out.println(groupid.get(0));
         userqueryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 members.clear();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String userId = (String) child.child("userMem").getValue();//UID
-
-                    Firebase gRef = new Firebase("https://burning-fire-7007.firebaseio.com/user");
+                    System.out.println(userId);
+                    Firebase gRef = myRef.child("user");
+                    //= new Firebase("https://burning-fire-7007.firebaseio.com/user");
                     Query qGref = gRef.orderByChild("userId").equalTo(userId);
                     qGref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 String email = (String) child.child("email").getValue();
+                                System.out.println(email);
+                                System.out.println(myRef.getAuth().getProviderData().get("email"));
                                 if (email == myRef.getAuth().getProviderData().get("email"))
                                     inGroup = true;
                                 members.add(email);
                             }
                         }
-
                         public void onCancelled(FirebaseError firebaseError) {
                         }
                     });
@@ -116,7 +119,6 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_multiple_choice, members);
                 userView.setAdapter(adapter);
             }
-
             @Override
             public void onCancelled(FirebaseError firebaseError) {
             }
@@ -146,7 +148,7 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                 }
                 else
                 {
-                    Toast toast = Toast.makeText(GroupActivity.this, "Welcome to group"+grpName+"!", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(GroupActivity.this, "Welcome to group "+ grpName +"!", Toast.LENGTH_SHORT);
                     toast.show();
                     GroupMembers gm = new GroupMembers();
                     gm.setGroupMem(groupid.get(0));
@@ -155,25 +157,6 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                     inGroup = true;
 
                 }
-                /*
-                final Query queryRef = membersListRef.orderByChild("groupId").equalTo(groupid.get(0));
-                queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot child : dataSnapshot.getChildren()) {
-                            System.out.println(child.child("userMem").getValue());
-                            if(child.child("userMem").getValue()== myRef.getAuth().getUid())
-                            {
-                                System.out.println("userMem == Uid");
-
-                                break;
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-                    }
-                }); */
                 break;
         }
            //     finish();
