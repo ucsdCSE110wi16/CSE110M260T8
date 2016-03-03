@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -36,6 +37,7 @@ public class Search extends AppCompatActivity {
     String[] items;
     ArrayList<String> listItems;
     ArrayAdapter<String> adapter;
+    ArrayList<String> idOfGroups;
     ListView listView;
     EditText editText;
     int checkDel = 0;
@@ -104,8 +106,12 @@ public class Search extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(Search.this, "Will go into "+listItems.get(position), Toast.LENGTH_SHORT).show();;
-                    finalData = "" + listItems.get(position);
+                    Intent intent = new Intent(Search.this, GroupActivity.class);
+                    ArrayList<String> list = new ArrayList<String>();
+                    list.add(idOfGroups.get(position));
+                    Log.v("Search", "GroupId:" + list.get(0));
+                    intent.putStringArrayListExtra("groupid", list);
+                    startActivity(intent);
 
 
 
@@ -130,6 +136,7 @@ public class Search extends AppCompatActivity {
         Firebase database = new Firebase("https://burning-fire-7007.firebaseio.com/group");
         Query query = database.orderByValue();
         listItems = new ArrayList<String>();
+        idOfGroups = new ArrayList<String>();
 
 
         query.addValueEventListener(new ValueEventListener() {
@@ -140,6 +147,8 @@ public class Search extends AppCompatActivity {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String name = (String) child.child("groupName").getValue();
                     listItems.add(name);
+                    String id = (String) child.child("groupId").getValue();
+                    idOfGroups.add(id);
                 }
 
             }
