@@ -108,6 +108,10 @@ public class CalActivity extends  AppCompatActivity {
         @Override
         public void onSelectDate(Date date, View view) {
             caldroidFragment.setBackgroundDrawableForDate(green, date);
+            String text = "I have completed all my goals for " + formatter.format(date) + "!";
+            Toast.makeText(getApplicationContext(), text,
+                    Toast.LENGTH_SHORT).show();
+            caldroidFragment.refreshView();
         }
 
         @Override
@@ -120,6 +124,10 @@ public class CalActivity extends  AppCompatActivity {
         @Override
         public void onLongClickDate(Date date, View view) {
             caldroidFragment.setBackgroundDrawableForDate(green, date);
+            String text = "I have completed all my goals for " + date + "!";
+            Toast.makeText(getApplicationContext(), text,
+                    Toast.LENGTH_SHORT).show();
+            caldroidFragment.refreshView();
         }
 
         @Override
