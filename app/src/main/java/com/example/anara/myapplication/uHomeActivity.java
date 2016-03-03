@@ -120,6 +120,12 @@ public void create(android.view.View button){
         startActivity(intent);
     }
 
+    public void logout(android.view.View button){
+        ref.unauth();
+        Intent intent = new Intent(uHomeActivity.this, StartActivity.class);
+        startActivity(intent);
+    }
+
 
 
 }
