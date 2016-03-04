@@ -12,7 +12,7 @@ public class GroupMembers {
 
     public String getGMemId() { return id;}
 
-    public String setGMemId(String id) { this.id = id; }
+    public String setGMemId(String id) { return this.id = id; }
 
     public void setGroupMem(String groupId) { this.groupId = groupId; }
 
