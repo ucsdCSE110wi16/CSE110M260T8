@@ -24,7 +24,7 @@ public class uHomeActivity extends AppCompatActivity {
 
     protected ArrayList<String> groupNames = new ArrayList<>();
     protected ArrayList<String> groupIds = new ArrayList<>();
-    Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com/");
+
 
 
     @Override
@@ -37,7 +37,7 @@ public class uHomeActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.header, groupView, false);
         groupView.addHeaderView(header, null, false);
-
+        Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com/");
         Firebase mRef = ref.child("groupMembers");
         Query queryRef = mRef.orderByChild("userMem").equalTo(ref.getAuth().getUid());
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -109,6 +109,7 @@ public void create(android.view.View button){
     //PASS THE USERID AS A PARAMETER TO CREATGROUPACTIVITY.JAVA
     Intent intent = new Intent(uHomeActivity.this, CreatGroupActivity.class);
     ArrayList<String> list = new ArrayList<String>();
+    Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com/");
     list.add(ref.getAuth().getUid());//NEED TO FIX THE USER ID HERE...
     intent.putStringArrayListExtra("userid", list);
     startActivity(intent);
@@ -120,6 +121,7 @@ public void create(android.view.View button){
     }
 
     public void logout(android.view.View button){
+        Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com/");
         ref.unauth();
         Intent intent = new Intent(uHomeActivity.this, StartActivity.class);
         startActivity(intent);

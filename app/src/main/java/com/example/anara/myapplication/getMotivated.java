@@ -1,5 +1,7 @@
 package com.example.anara.myapplication;
 
+import android.content.Context;
+
 import com.firebase.client.Firebase;
 
 /**
@@ -7,9 +9,14 @@ import com.firebase.client.Firebase;
  */
 public class getMotivated extends android.app.Application {
 
-    @Override
+    private static Context context;
+
     public void onCreate() {
         super.onCreate();
-        Firebase.setAndroidContext(this);
+        getMotivated.context = getApplicationContext();
+    }
+
+    public static Context getAppContext() {
+        return getMotivated.context;
     }
 }
