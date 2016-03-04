@@ -56,6 +56,7 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String desc = (String) child.child("description").getValue();
                     grpName = (String) child.child("groupName").getValue();
+                    groupid.add(grpName);
                     descTextView.setText(grpName + ": \n" + desc);
                 }
             }
@@ -89,9 +90,11 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 String email = (String) child.child("email").getValue();
                                 System.out.println("email:"+email);
-                                if (userId.equals(myRef.getAuth().getUid()))
+                                if (userId.equals(myRef.getAuth().getUid())){
                                     inGroup = true;
+                                }
                                 members.add(email);
+                                groupid.add(email);
                             }
                         }
                         public void onCancelled(FirebaseError firebaseError) {

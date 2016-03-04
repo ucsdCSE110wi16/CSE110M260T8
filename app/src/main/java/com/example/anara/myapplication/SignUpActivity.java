@@ -30,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity{
 
     private View mProgressView;
     private View mSignUpView;
+    public boolean successful = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity{
                     Firebase userListRef = new Firebase("https://burning-fire-7007.firebaseio.com/user");
                     User stud = new User();
                     stud.setEmail(email);
-                    stud.setUserId(ref.getAuth().getUid());
+                    stud.setUserId((String)(result.get("uid")));
                     userListRef.child(stud.getUserId()).setValue(stud);
                     finish();
                     Intent intent = new Intent(SignUpActivity.this, uHomeActivity.class);
@@ -113,6 +114,7 @@ public class SignUpActivity extends AppCompatActivity{
                     Log.e("SignUpActivity", firebaseError.getMessage());
                 }
             });
+
 
             finish();
             Intent intent = new Intent(SignUpActivity.this, SignUpActivity.class);
