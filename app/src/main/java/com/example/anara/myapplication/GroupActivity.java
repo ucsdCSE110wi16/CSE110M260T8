@@ -90,12 +90,13 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 email = (String) child.child("email").getValue();
-                                System.out.println("email:"+email);
+                                System.out.println("email:" + email);
                                 if (userId.equals(myRef.getAuth().getUid())){
+                                    groupid.add(email);
                                     inGroup = true;
                                 }
                                 members.add(email);
-                                groupid.add(email);
+
                             }
                         }
                         public void onCancelled(FirebaseError firebaseError) {

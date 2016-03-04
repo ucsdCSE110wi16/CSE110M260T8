@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class MessageDataSource {
 
     private static final Firebase theBase = new Firebase("https://burning-fire-7007.firebaseio.com/chat");
-    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddss");
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
     private static final String TAG = "MessageDataSource";
     private static final String COLUMN_TEXT = "text";
     private static final String COLUMN_SENDER = "sender";
