@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.firebase.client.*;
-import com.firebase.ui.FirebaseListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
