@@ -138,7 +138,8 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                     GroupMembers gm = new GroupMembers();
                     gm.setGroupMem(groupid.get(0));
                     gm.setUserMem(myRef.getAuth().getUid());
-                    membersListRef.child(gm.getGroupMem()).setValue(gm);
+                    gm.setGMemId(membersListRef.push().getKey());
+                    membersListRef.child(gm.getGMemId()).setValue(gm);
                     inGroup = true;
 
                 }
