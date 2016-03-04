@@ -86,7 +86,7 @@ public class uHomeActivity extends AppCompatActivity {
                                     int position, long id) {
                Intent intent = new Intent(uHomeActivity.this, GroupActivity.class);
                 ArrayList<String> list = new ArrayList<String>();
-                list.add(groupIds.get(position));
+                list.add(groupIds.get(position-1));
                 Log.v("uHomeActivity", "GroupId:" +list.get(0));
                 intent.putStringArrayListExtra("groupid", list);
                 startActivity(intent);

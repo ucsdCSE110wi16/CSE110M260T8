@@ -81,7 +81,7 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
         Messages msg = new Messages();
         msg.setMessageDate(new Date());
         msg.setMsg(newMessage);
-        msg.setMsgId("Chang");
+        msg.setMsgId(groupid.get(2));
 
         MessageDataSource.saveMessage(msg, mConvoId);
     }
@@ -90,7 +90,16 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
         mMessages.add(message);
         messageAdapter.notifyDataSetChanged();
     }
-
+    /*
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this, GroupActivity.class);
+        intent.putStringArrayListExtra("groupid", groupid);
+        startActivity(intent);
+        //super.onBackPressed();  // optional depending on your needs
+    }
+    */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -113,7 +122,7 @@ public class ChatActivity extends ActionBarActivity implements View.OnClickListe
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams)nameView.getLayoutParams();
 
             int sdk = Build.VERSION.SDK_INT;
-            if (message.getMsgId().equals("Chang")){
+            if (message.getMsgId().equals(groupid.get(2))){
 
                if (sdk >= Build.VERSION_CODES.JELLY_BEAN) {
                    nameView.setBackground(getDrawable(R.drawable.bubble_right_green));
