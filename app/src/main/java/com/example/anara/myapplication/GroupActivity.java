@@ -29,6 +29,7 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
     Firebase myRef = new Firebase("https://burning-fire-7007.firebaseio.com");
     boolean inGroup = false; //to hold the curr user's status
     String grpName = "";
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,7 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                String email = (String) child.child("email").getValue();
+                                email = (String) child.child("email").getValue();
                                 System.out.println("email:"+email);
                                 if (userId.equals(myRef.getAuth().getUid())){
                                     inGroup = true;
@@ -136,6 +137,7 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                     Toast toast = Toast.makeText(GroupActivity.this, "Welcome to "+ grpName +"!", Toast.LENGTH_SHORT);
                     toast.show();
                     GroupMembers gm = new GroupMembers();
+                    groupid.add(email);
                     gm.setGroupMem(groupid.get(0));
                     gm.setUserMem(myRef.getAuth().getUid());
                     gm.setGMemId(membersListRef.push().getKey());
