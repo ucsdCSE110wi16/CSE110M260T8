@@ -105,7 +105,7 @@ public class SignUpActivity extends AppCompatActivity{
                     stud.setUserId((String)(result.get("uid")));
                     userListRef.child(stud.getUserId()).setValue(stud);
                     finish();
-                    Intent intent = new Intent(SignUpActivity.this, uHomeActivity.class);
+                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
 

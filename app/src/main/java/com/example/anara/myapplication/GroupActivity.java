@@ -30,6 +30,7 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
     boolean inGroup = false; //to hold the curr user's status
     String grpName = "";
     String email;
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +68,9 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        final ListView userView = (ListView) findViewById(R.id.listView);
         Firebase.setAndroidContext(this);
 
+        final ListView userView = (ListView) findViewById(R.id.listView);
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.header2, userView, false);
         userView.addHeaderView(header, null, false);
@@ -103,7 +104,7 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                         }
                     });
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_multiple_choice, members);
+                adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_multiple_choice, members);
                 userView.setAdapter(adapter);
             }
             @Override
@@ -138,12 +139,50 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                     Toast toast = Toast.makeText(GroupActivity.this, "Welcome to "+ grpName +"!", Toast.LENGTH_SHORT);
                     toast.show();
                     GroupMembers gm = new GroupMembers();
-                    groupid.add(email);
                     gm.setGroupMem(groupid.get(0));
                     gm.setUserMem(myRef.getAuth().getUid());
                     gm.setGMemId(membersListRef.push().getKey());
                     membersListRef.child(gm.getGMemId()).setValue(gm);
-                    inGroup = true;
+
+                    Firebase mRef = myRef.child("groupMembers");
+                    Query userqueryRef = mRef.orderByChild("groupMem").equalTo(groupid.get(0));
+                    userqueryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            members.clear();
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                final String userId = (String) child.child("userMem").getValue();//UID
+                                System.out.println(userId);
+                                Firebase gRef = myRef.child("user");
+                                Query qGref = gRef.orderByChild("userId").equalTo(userId);
+                                qGref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                            email = (String) child.child("email").getValue();
+                                            System.out.println("email:" + email);
+                                            if (userId.equals(myRef.getAuth().getUid())) {
+                                                groupid.add(email);
+                                                inGroup = true;
+                                            }
+                                            members.add(email);
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(FirebaseError firebaseError) {
+
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
+
+                        }
+                    });
 
                 }
                 break;
