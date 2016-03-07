@@ -10,12 +10,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".CreatGroupActivity"
-    tools:showIn="@layout/activity_creat_group">
+    tools:showIn="@layout/activity_creat_group"
+    android:background="#2cb1dd">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:background="#2cb1dd">
 
         <TextView
             android:id="@+id/TextViewTitle"
