@@ -67,7 +67,6 @@ public class goToCreateTest extends ApplicationTestCase<getMotivated> {
                 System.out.println("Authenticated Successfully!!");
                 System.out.flush();
             }
-
             @Override
             public void onAuthenticationError(FirebaseError firebaseError) {
                 System.out.println("Authentication Error!:" + firebaseError);
