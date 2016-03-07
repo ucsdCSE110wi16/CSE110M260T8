@@ -68,10 +68,10 @@
         <activity
             android:name=".ChatActivity"
             android:label="@string/chat"
-            android:parentActivityName=".GroupActivity">
+            android:parentActivityName=".uHomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.anara.myapplication.GroupActivity" />
+                android:value="com.example.anara.myapplication.uHomeActivity" />
         </activity>
         <activity
             android:name=".CalActivity"

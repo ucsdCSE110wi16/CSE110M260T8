@@ -38,9 +38,7 @@ public class SignUpActivity extends AppCompatActivity{
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_main);
         mProgressView = findViewById(R.id.signup_progress);
-        mSignUpView = findViewById(R.id.signup_form);/*
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar); blarg.*/
+        mSignUpView = findViewById(R.id.signup_form);
     }
 
     @Override
