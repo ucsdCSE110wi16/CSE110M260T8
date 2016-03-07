@@ -36,7 +36,7 @@ public class SignUpActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_signup);
         mProgressView = findViewById(R.id.signup_progress);
         mSignUpView = findViewById(R.id.signup_form);
     }
