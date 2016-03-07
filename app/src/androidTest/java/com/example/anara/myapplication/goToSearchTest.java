@@ -1,6 +1,10 @@
 package com.example.anara.myapplication;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ApplicationTestCase;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -29,27 +33,32 @@ import static org.hamcrest.Matchers.containsString;
 @LargeTest
 public class goToSearchTest extends ApplicationTestCase<getMotivated> {
 
+    @Rule
+    public ActivityTestRule<uHomeActivity> activityRule = new ActivityTestRule(uHomeActivity.class);
     private boolean test;
 
     public goToSearchTest() {
         super(getMotivated.class);
     }
 
+    @Before
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        createApplication();
+        super.setContext(this.getContext());
         Firebase.setAndroidContext(getContext());
         Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com");
         ref.authWithPassword("dummy@test.edu", "testit", new Firebase.AuthResultHandler() {
             @Override
             public void onAuthenticated(AuthData authData) {
-                test = true;
+                System.err.println("Test Stuff:");
+                System.err.flush();
             }
 
             @Override
             public void onAuthenticationError(FirebaseError firebaseError) {
-                System.out.println("Test Error!:" + firebaseError);
+                System.err.println("Test Error!:" + firebaseError);
+                System.err.flush();
             }
         });
     }
@@ -57,7 +66,8 @@ public class goToSearchTest extends ApplicationTestCase<getMotivated> {
 
     @Test
     public void clickSearchButtonGoesToSearch() {
-        if(test) {
+        activityRule.launchActivity(new Intent());
+
             onView(withId(R.id.searchG)).perform(click());
             onView(withId(R.id.txtsearch)).check(matches(withHint("Search")));
 
@@ -65,6 +75,5 @@ public class goToSearchTest extends ApplicationTestCase<getMotivated> {
                     .perform(typeText("tupac"), closeSoftKeyboard()).perform(pressKey(13));
 
             onView(withId(R.id.listview)).check(matches(withText(containsString("tupac"))));
-        }
     }
 }

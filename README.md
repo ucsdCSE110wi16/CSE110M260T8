@@ -9,14 +9,20 @@ Group SCHEDULE:
 3/1 -- Work on individual tasks
 
 3/2 -- Group meet up, work on testing scenarios, connect individual tasks
-Scenarios to test :
-- Given that I am logged in as a user and on my home page when I click the 'Create A Group' button, then I will be taken to the group creation page.
-- Given that I am in the group creation page when I submit the group information, then a group should be created and I should be redirected to the group's homepage.
-- Given that I am logged in as a user and on my home page when I click the 'Search' button, then I will be taken to the search page.
+Scenarios to test* :
+- Given that I am logged in as a user and on my home page when I click the 'Create A Group' button, then I will be taken to the group creation page. When I enter in my
+    new group's information and click the 'Submit' button, then a group should be created and I should be redirected to the group's homepage.
+- Given that I am logged in as a user and on my home page when I click the 'Search' button, then I will be taken to the search page. When I enter in a group name into the
+    search field and hit the enter key on my keyboard, then pertinent results to my query will appear below the search field.
+- Given that I have launched the getMotivated app and would like to become a member when I click the 'Signup' button, then I can enter my information into the given fields.
+    When I click the 'Submit' button, then I will be taken to my member homepage.
+*These have been changed on 3/5 to more widely cover the functionality of our app.
 
 3/3 -- Group meet up, work on testing scenarios, connect individual tasks
 
-3/4 -- App testing and code is complete
+3/5 -- Finish up testing and functionality.
+
+3/6 -- Finish up styling, testing and code is complete. App is complete.
 
 3/7 -- App is due
 

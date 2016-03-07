@@ -1,9 +1,14 @@
 package com.example.anara.myapplication;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ApplicationTestCase;
+import android.test.mock.MockApplication;
+import android.test.mock.MockContext;
 import android.test.suitebuilder.annotation.LargeTest;
 
 import com.firebase.client.AuthData;
@@ -34,6 +39,8 @@ import java.util.concurrent.CountDownLatch;
 @LargeTest
 public class goToCreateTest extends ApplicationTestCase<getMotivated> {
 
+    @Rule
+    public ActivityTestRule<uHomeActivity> activityRule = new ActivityTestRule(uHomeActivity.class);
     private boolean test;
 
     public goToCreateTest(){
@@ -41,33 +48,34 @@ public class goToCreateTest extends ApplicationTestCase<getMotivated> {
 
     }
 
-    /*@Rule
-    public ActivityTestRule<uHomeActivity> uActivityRule = new ActivityTestRule<>(
-            uHomeActivity.class);*/
-
+    @Before
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        createApplication();
+        super.setContext(this.getContext());
         Firebase.setAndroidContext(getContext());
         Firebase ref = new Firebase("https://burning-fire-7007.firebaseio.com");
-        ref.authWithPassword("dummy@test.edu", "testit", new Firebase.AuthResultHandler() {
+       ref.authWithPassword("dummy@test.edu", "testit", new Firebase.AuthResultHandler() {
             @Override
             public void onAuthenticated(AuthData authData) {
-                test = true;
+                System.out.println("Test is true!!");
+                System.out.flush();
             }
-
             @Override
             public void onAuthenticationError(FirebaseError firebaseError) {
                 System.out.println("Test Error!:" + firebaseError);
+                System.out.flush();
             }
         });
+        Thread.sleep(60000);
     }
 
     @Test
     public void clickCreateButtonGoesToCreate() {
-
+        activityRule.launchActivity(new Intent());
         if(test) {
+            System.out.println("Test is TRUE");
+            System.out.flush();
             onView(withId(R.id.create)).perform(click());
             onView(withId(R.id.TextViewTitle)).check(matches(withText("Create New Group")));
 
@@ -77,6 +85,11 @@ public class goToCreateTest extends ApplicationTestCase<getMotivated> {
                     .perform(typeText("Have a cup of Espresso."), closeSoftKeyboard());
             onView(withId(R.id.Submit)).perform(click());
 
+            onView(withId(R.id.goal)).check(matches(withText(containsString("Espresso!"))));
+        }
+        else{
+            System.out.println("Test FAIL.");
+            System.out.flush();
             onView(withId(R.id.goal)).check(matches(withText(containsString("Espresso!"))));
         }
     }
