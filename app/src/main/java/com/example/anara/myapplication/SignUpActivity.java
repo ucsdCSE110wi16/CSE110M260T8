@@ -30,7 +30,7 @@ public class SignUpActivity extends AppCompatActivity{
 
     private View mProgressView;
     private View mSignUpView;
-    public boolean successful = false;
+    View focusView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +49,10 @@ public class SignUpActivity extends AppCompatActivity{
     }
 
     public void submit(View button) {
-        View focusView = null;
         boolean cancel = false;
         EditText etPass = (EditText) findViewById(R.id.EditTextPass);
         EditText etPass1 = (EditText) findViewById(R.id.EditTextPass1);
-        EditText etEmail = (EditText) findViewById(R.id.EditTextEmail);
+        final EditText etEmail = (EditText) findViewById(R.id.EditTextEmail);
         String password = etPass.getText().toString();
         String passConfirm = etPass1.getText().toString();
         final String email = etEmail.getText().toString();
@@ -110,13 +109,18 @@ public class SignUpActivity extends AppCompatActivity{
                 @Override
                 public void onError(FirebaseError firebaseError) {
                     Log.e("SignUpActivity", firebaseError.getMessage());
+                    etEmail.setError(firebaseError.getMessage());
+                    focusView = etEmail;
                 }
             });
 
-
-            finish();
-            Intent intent = new Intent(SignUpActivity.this, SignUpActivity.class);
-            startActivity(intent);
+            if(focusView == null) {
+                finish();
+                Intent intent = new Intent(SignUpActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }else{
+                focusView.requestFocus();
+            }
         }
     }
 

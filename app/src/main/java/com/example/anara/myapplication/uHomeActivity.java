@@ -78,6 +78,12 @@ public class uHomeActivity extends AppCompatActivity {
         });
         ArrayAdapter<String> adapter = new ArrayAdapter<>(uHomeActivity.this, android.R.layout.simple_list_item_multiple_choice, groupNames);
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         groupView.setAdapter(adapter);
 
         groupView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -105,6 +105,11 @@ public class GroupActivity extends AppCompatActivity implements View.OnClickList
                     });
                 }
                 adapter = new ArrayAdapter<>(GroupActivity.this, android.R.layout.simple_list_item_multiple_choice, members);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 userView.setAdapter(adapter);
             }
             @Override

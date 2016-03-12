@@ -56,7 +56,7 @@ public class SignupTest extends ApplicationTestCase<getMotivated> {
 
     /* !! Be sure to delete signup@test.com after test fore reuse !! */
     @Test
-    public void testSignUpNewUser() {
+    public void testSignUpNewUser() throws InterruptedException {
 
         onView(withText("Sign Up")).check(matches(isClickable())).perform(click());
 
@@ -73,6 +73,8 @@ public class SignupTest extends ApplicationTestCase<getMotivated> {
 
         onView(withId(R.id.Submit))
                   .perform(click(click()));
+
+        Thread.sleep(3000);
 
         onView(withId(R.id.email_sign_in_button)).check(matches(withText("Login")));
 

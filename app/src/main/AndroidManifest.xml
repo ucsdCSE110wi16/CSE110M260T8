@@ -13,7 +13,8 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label=".getMotivated"
+        android:name=".getMotivated"
+        android:label="getMotivated"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".StartActivity">

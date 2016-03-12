@@ -210,12 +210,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
 
@@ -368,27 +366,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             });
             System.out.println("password" + mPassword);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("ref.getAuth: " + ref.getAuth());
             if (ref.getAuth() != null)
                 return true;
             else{
                 return false;
             }
-            /*try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }*/
-            // TODO: register the new account here.
 
         }
 
@@ -396,16 +384,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
-            System.out.println("Success:" +success);
             if (success) {
-                System.out.println("Goes here!");
                 finish();
                 Intent intent = new Intent(LoginActivity.this, uHomeActivity.class);
                 startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
-                System.out.println("Goes here");
             }
         }
 
